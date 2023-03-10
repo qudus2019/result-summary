@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="styles.css">
+  
+  <title>Frontend Mentor | Results summary component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="container">
+      <div class="report">
+        <h5 class="report_heading heading">Your Result</h5>
+        <div class="score_wrapper">
+          <p class="numerator"><b> 0</b></p>
+          <p class="total">of 100</p>
+        </div>
+        <p class="remark">Great!</p>
+        <p class="comment">You scored higher than 65% of the people who have taken these tests.</p>
+      </div>
+      <div class="scores_details">
+        <h5 class="score_details_heading heading">Summary</h5>
+        <div class="subjects">
+    <div class="subject subject-1">
+      <div>
+        <img src="assets/images/icon-reaction.svg" alt="ff">
+        <p class="subject-name">Reaction</p>
+      </div>
+        <p>
+          <span class="score">80</span>
+          <span class="silver">/</span>
+          <span class="silver">100</span>
+        </p>
+    </div>
+    <div class="subject subject-2">
+      <div>
+        <img src="assets/images/icon-memory.svg" alt="ff">
+        <p class="subject-name">Memory</p>
+      </div>
+        <p>
+          <span class="score">92</span>
+          <span class="silver">/</span>
+          <span class="silver">100</span>
+        </p>
+    </div>
+    <div class="subject subject-3">
+      <div>
+        <img src="assets/images/icon-verbal.svg" alt="ff">
+        <p class="subject-name">Verbal</p>
+      </div>
+        <p>
+          <span class="score">65</span>
+          <span class="silver">/</span>
+          <span class="silver">100</span>
+        </p>
+    </div>
+    <div class="subject subject-4">
+      <div>
+        <img src="assets/images/icon-visual.svg" alt="ff">
+        <p class="subject-name">Visual</p>
+      </div>
+        <p>
+          <span class="score">72</span>
+          <span class="silver">/</span>
+          <span class="silver">100</span>
+        </p>
+    </div>
+
+    </div>
+    <button type="button">Continue</button>
+    </div>
+  </main>  
+    
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+
+  <script>
+    let dat ;
+    let score = document.querySelector('.numerator');
+    const button = document.querySelector('button');
+    console.log(button);
+
+    button.addEventListener('click', e => {
+      let url = '\data.json';
+      let pullDate = fetch(url).then(response => {
+        return response.json();
+      }).then(data => {
+        console.log(data)
+
+        dat = [...data];
+        console.log('the data is:', dat);
+
+        score.textContent = calculate(dat);
+
+        
+      }).catch(() => {
+        console.log('there is an error!')
+      })
+    })
+
+    function calculate(arr){
+      let sum = 0;
+
+      arr.forEach(each => {
+        sum += each.score;
+        console.log(each.category , ':', each.score);
+      })
+
+      return Math.round(sum/arr.length);
+    }
+  </script>
+</body>
+</html>
