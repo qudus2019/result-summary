@@ -206,6 +206,7 @@ button:hover{
         grid-template-columns: 1fr;
         width: 400px;
         max-width:100vw;
+        margin-top:500px;
     }
 
 }
